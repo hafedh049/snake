@@ -10,7 +10,7 @@
 #define true 1
 #define false 0
 
-//Game Loop conditoin variable
+//Game Loop condition variable
 int isRunning;
 
 //Entry Point of the program or the game it accepts number of arguments and array of strings which means the arguments
@@ -26,40 +26,54 @@ int main(int argc, char **argv)
     if (!window)
         fprintf(stderr, "%s\n", SDL_GetError()); //fprintf : File Printer to the standard error output 'stderr' 
 
-
+    //Responsible for the 2D "context", this guy is the one who draws. 
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
 
+    //Safety checks
     if (!renderer)
         fprintf(stderr, "%s\n", SDL_GetError());
 
+    //Turning the draw color to black (the background color)
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+    //Its good to always clear the rendered at the start
     SDL_RenderClear(renderer);
+    //Make the rendered visible on the window
     SDL_RenderPresent(renderer);
 
+    //The starting x and y of the Snake
     int startingx = WIDTH / 2;
     int startingy = HEIGHT / 2;
 
+    //Creating the Snake
     Snake *snake = initializeSnake();
 
+    //Inserting 5 parts of the snake at the beginning and each step is adding/substracting 25px
     insertBeginning(snake, startingx, startingy);
     insertEnd(snake, startingx + 25, startingy);
     insertBeginning(snake, startingx - 25, startingy);
     insertBeginning(snake, startingx - 50, startingy);
     insertBeginning(snake, startingx - 75, startingy);
 
+    //Creating the snake's food with (x, y) = (100, 100) and dimension of 25x25
     SDL_Rect food;
     food.x = 100;
     food.y = 100;
     food.w = 25;
     food.h = 25;
 
+    //Changing the color to red for the food
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 0);
+    //Drawing the food's border
     SDL_RenderDrawRect(renderer, &food);
+    //Fills the food with red color
     SDL_RenderFillRect(renderer, &food);
+    //Showing the food
     SDL_RenderPresent(renderer);
 
+    //Initializing the seed's generator for pseudo-random numbers
     srand(time(0));
 
+    //Setting the GLCV to true the 
     isRunning = 1;
     int done = false;
     int isStarting = true;
@@ -219,12 +233,17 @@ int main(int argc, char **argv)
 
         while (temp->next != snake->tail)
         {
+            //If the snake touches itself
             if (snake->tail->body.x == temp->body.x && snake->tail->body.y == temp->body.y)
             {
+                //Wait before doing something
                 SDL_Delay(1500);
+                //End of game
                 done = 1;
+                //Exiting the loop
                 break;
             }
+            //Moving forward the traverse all the snake
             temp = temp->next;
         }
 
