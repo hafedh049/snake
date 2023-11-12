@@ -208,7 +208,7 @@ int main(int argc, char **argv)
 
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
-        Node *temp = snake->head;
+        SnakeNode *temp = snake->head;
 
         while (temp->next != snake->tail)
         {

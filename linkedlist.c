@@ -28,7 +28,6 @@ void insertBeginning(Snake *snake, int x, int y)
         }
         return;
     }
-
     else
     {
         SnakeNode *temp = snake->head;
@@ -59,7 +58,6 @@ void insertEnd(Snake *snake, int x, int y)
         node->body.h = 25;
         snake->tail = node;
     }
-
     else
     {
         SnakeNode *node = (SnakeNode *)malloc(sizeof(SnakeNode));
