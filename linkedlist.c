@@ -16,7 +16,7 @@ void insertBeginning(Snake *snake, int x, int y)
 
     if (snake->head == NULL)
     {
-        Node *node = (Node *)malloc(sizeof(Node));
+        SnakeNode *node = (SnakeNode *)malloc(sizeof(SnakeNode));
         if (node != NULL)
         {
             node->next = snake->tail;
@@ -31,8 +31,8 @@ void insertBeginning(Snake *snake, int x, int y)
 
     else
     {
-        Node *temp = snake->head;
-        Node *node = (Node *)malloc(sizeof(Node));
+        SnakeNode *temp = snake->head;
+        SnakeNode *node = (SnakeNode *)malloc(sizeof(SnakeNode));
         if (node != NULL)
         {
             node->body.x = x;
@@ -50,7 +50,7 @@ void insertEnd(Snake *snake, int x, int y)
 
     if (snake->tail == NULL)
     {
-        Node *node = (Node *)malloc(sizeof(Node));
+        SnakeNode *node = (SnakeNode *)malloc(sizeof(SnakeNode));
         node->next = NULL;
         snake->head->next = node;
         node->body.x = x;
@@ -62,7 +62,7 @@ void insertEnd(Snake *snake, int x, int y)
 
     else
     {
-        Node *node = (Node *)malloc(sizeof(Node));
+        SnakeNode *node = (SnakeNode *)malloc(sizeof(SnakeNode));
         if (node != NULL)
         {
             node->next = NULL;
@@ -81,7 +81,7 @@ void deleteBeginning(Snake *snake)
 
     if (snake->head != NULL)
     {
-        Node *temp = snake->head;
+        SnakeNode *temp = snake->head;
         snake->head = snake->head->next;
         free(temp);
     }
@@ -92,11 +92,9 @@ void deleteEnd(Snake *snake)
 
     if (snake->tail != NULL)
     {
-        Node *temp = snake->head;
+        SnakeNode *temp = snake->head;
         while (temp->next != snake->tail)
-        {
             temp = temp->next;
-        }
         snake->tail = temp;
         free(temp);
     }
