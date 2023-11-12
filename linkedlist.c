@@ -1,5 +1,6 @@
 #include "linkedlist.h"
 
+// Initialize a snake by setting the linked list's head and tail to NULL
 Snake *initializeSnake()
 {
     Snake *snake = (Snake *)malloc(sizeof(snake));
@@ -11,6 +12,7 @@ Snake *initializeSnake()
     return snake;
 }
 
+//Insert SnakeNode at the beginning ofc after checking if the snake is empty at first
 void insertBeginning(Snake *snake, int x, int y)
 {
 
@@ -44,6 +46,7 @@ void insertBeginning(Snake *snake, int x, int y)
     }
 }
 
+//Insert SnakeNode at the end (APPEND) ofc after checking if the snake is empty at first
 void insertEnd(Snake *snake, int x, int y)
 {
 
@@ -74,6 +77,7 @@ void insertEnd(Snake *snake, int x, int y)
     }
 }
 
+//Delete a SnakeNode from the beginning
 void deleteBeginning(Snake *snake)
 {
 
@@ -85,6 +89,7 @@ void deleteBeginning(Snake *snake)
     }
 }
 
+//Delete a SnakeNode from the end
 void deleteEnd(Snake *snake)
 {
 

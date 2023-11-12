@@ -1,20 +1,25 @@
 #include <stdio.h>
+//Game Engine written in C
 #include <SDL2/SDL.h>
 #include <time.h>
 #include "linkedlist.c"
 
+//Initializing CONSTANTS
 #define WIDTH 800
 #define HEIGHT 600
 #define true 1
 #define false 0
 
+//Game Loop conditoin variable
 int isRunning;
 
+//Entry Point of the program or the game it accepts number of arguments and array of strings which means the arguments
 int main(int argc, char **argv)
 {
+    //Initialize the SDL Library
+    SDL_Init(SDL_INIT_EVERYTHING /*ALL THE ATTRIBUTES (AUDIO, MIC, VIDEO, SENSORS, JOYSTICKS, ...)*/);
 
-    SDL_Init(SDL_INIT_EVERYTHING);
-
+    //This is the main window of the game, the SDL_CreateWindow returns an pointer instance of the SDL_Window it accepts the title, the positions (x, y) and the width and height. 
     SDL_Window *window = SDL_CreateWindow("Snake", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, 0);
 
     if (!window)
