@@ -22,8 +22,10 @@ int main(int argc, char **argv)
     //This is the main window of the game, the SDL_CreateWindow returns an pointer instance of the SDL_Window it accepts the title, the positions (x, y) and the width and height. 
     SDL_Window *window = SDL_CreateWindow("Snake", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, 0);
 
+    //If an error happens the SDL_GetError() function will returns the last error message and terminates the thread.
     if (!window)
-        fprintf(stderr, "%s\n", SDL_GetError());
+        fprintf(stderr, "%s\n", SDL_GetError()); //fprintf : File Printer to the standard error output 'stderr' 
+
 
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
 
