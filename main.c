@@ -17,21 +17,13 @@ int isRunning;
 int main(int argc, char **argv)
 {
     // Initialize the SDL Library
-    SDL_Init(SDL_INIT_EVERYTHING /*ALL THE ATTRIBUTES (AUDIO, MIC, VIDEO, SENSORS, JOYSTICKS, ...)*/);
+    SDL_Init(SDL_INIT_EVERYTHING); /*ALL THE ATTRIBUTES (AUDIO, MIC, VIDEO, SENSORS, JOYSTICKS, ...)*/
 
     // This is the main window of the game, the SDL_CreateWindow returns an pointer instance of the SDL_Window it accepts the title, the positions (x, y) and the width and height.
     SDL_Window *window = SDL_CreateWindow("Snake", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WIDTH, HEIGHT, 0);
 
-    // If an error happens the SDL_GetError() function will returns the last error message and terminates the thread.
-    if (!window)
-        fprintf(stderr, "%s\n", SDL_GetError()); // fprintf : File Printer to the standard error output 'stderr'
-
     // Responsible for the 2D "context", this guy is the one who draws.
     SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
-
-    // Safety checks
-    if (!renderer)
-        fprintf(stderr, "%s\n", SDL_GetError());
 
     // Turning the draw color to black (the background color)
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
@@ -166,16 +158,16 @@ int main(int argc, char **argv)
             }
         }
 
-        //aSSUME THAT THE TAIL IS THE HEAD BECAUSE WE ROTATED THE SNAKE AT THE BEGINNING
+        // aSSUME THAT THE TAIL IS THE HEAD BECAUSE WE ROTATED THE SNAKE AT THE BEGINNING
         int headx = snake->tail->body.x;
         int heady = snake->tail->body.y;
 
         if (up && !down)
-        {   //FOR EACH FRAME WE INSERT AT THE END AND RETRAIN FROM THE BEGINNING
-            //DESCRIMENTING THE Y BY -25 BECAUSE IN THE GRID OF XY WE SHOULD REDUCE Y TO GO ABOVE
+        { // FOR EACH FRAME WE INSERT AT THE END AND RETRAIN FROM THE BEGINNING
+            // DESCRIMENTING THE Y BY -25 BECAUSE IN THE GRID OF XY WE SHOULD REDUCE Y TO GO ABOVE
             insertEnd(snake, headx, heady - 25);
 
-            //IF SURPASSES THE BORDERS
+            // IF SURPASSES THE BORDERS
             if (heady <= 0)
             {
                 SDL_Delay(1500);
@@ -228,19 +220,19 @@ int main(int argc, char **argv)
             deleteBeginning(snake);
         }
 
-        //SETTING EVERYTHING TO BLACK AND CLEARING THE RENDERER
+        // SETTING EVERYTHING TO BLACK AND CLEARING THE RENDERER
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
         SDL_RenderClear(renderer);
 
-        //RE-DRAWING THE FOOD
+        // RE-DRAWING THE FOOD
         SDL_SetRenderDrawColor(renderer, 255, 0, 0, 0);
         SDL_RenderDrawRect(renderer, &food);
         SDL_RenderFillRect(renderer, &food);
 
-        //CHECK IF THE SNAKE ATE ITS FOOD IF YES INCRESE THE SNAKE BODY AND RE-POINT THE FOOD
+        // CHECK IF THE SNAKE ATE ITS FOOD IF YES INCRESE THE SNAKE BODY AND RE-POINT THE FOOD
         if (snake->tail->body.x == food.x && snake->tail->body.y == food.y)
         {
-            //rand() return a number between 0 and 20 millions
+            // rand() return a number between 0 and 20 millions
             int foodx = rand() % 31;
             int foody = rand() % 23;
 
@@ -253,7 +245,7 @@ int main(int argc, char **argv)
             insertBeginning(snake, tailx, taily);
         }
 
-        //SET THE SNAKE COLOR TO WHITE
+        // SET THE SNAKE COLOR TO WHITE
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
         SnakeNode *temp = snake->head;

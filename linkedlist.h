@@ -1,16 +1,17 @@
 #include <stdlib.h>
 #include <SDL2/SDL.h>
 
-//Snake Part
+// Snake Part
 typedef struct SnakeNode
 {
     SDL_Rect body;
     struct SnakeNode *next;
 } SnakeNode;
 
-//Entire Snake
+// Entire Snake
 typedef struct Snake
 {
+    int length;
     SnakeNode *head, *tail;
 } Snake;
 

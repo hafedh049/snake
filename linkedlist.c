@@ -32,7 +32,6 @@ void insertBeginning(Snake *snake, int x, int y)
     }
     else
     {
-        SnakeNode *temp = snake->head;
         SnakeNode *node = (SnakeNode *)malloc(sizeof(SnakeNode));
         if (node != NULL)
         {
@@ -98,7 +97,8 @@ void deleteEnd(Snake *snake)
         SnakeNode *temp = snake->head;
         while (temp->next != snake->tail)
             temp = temp->next;
+        free(temp->next);
         snake->tail = temp;
-        free(temp);
+        snake->tail->next = NULL;
     }
 }
